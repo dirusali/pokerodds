@@ -306,3 +306,15 @@ else:
     should_call(players,futuro,pot,price)
 
     
+    
+river = []
+river.append(str(input('enter card: ')))
+flop.append(river[0])
+combiriver = evalua(flop,combi)
+r = df.loc[df['valor'] >= combiriver, ['valor']]
+actual = (df.loc[df['valor'] >= combiriver[0], ['valor']].index[0]/2598960)*100
+print('Mi valor final máximo es %s' % actual)
+players = float(input('enter number of players: '))
+pot = float(input('enter pot value: '))
+price = float(input('enter value of your bet: '))
+should_call(players,actual,pot,price)
