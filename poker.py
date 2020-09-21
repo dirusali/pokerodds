@@ -269,3 +269,22 @@ df = pd.DataFrame(data)
 #pot = float(input('enter pot value: '))
 #price = float(input('enter value of your bet: '))
 #should_call(players,percen,pot,price)
+
+flop = []
+
+for i in range(0,5):
+    flop.append(str(input('enter card: ')))
+flopscore = evalua(flop,combi)
+actual = (df.loc[df['valor'] >= flopscore[0], ['valor']].index[0]/2598960)*100
+futuro = (df.loc[df['valor'] >= flopscore[1], ['valor']].index[0]/2598960)*100
+print('tengo ahora un valor de %s y la media futura es %s' % (actual,futuro))
+players = float(input('enter number of players: '))
+pot = float(input('enter pot value: '))
+price = float(input('enter value of your bet: '))
+if actual > futuro:
+    should_call(players,actual,pot,price)
+else:
+    should_call(players,futuro,pot,price)
+
+    
+    
