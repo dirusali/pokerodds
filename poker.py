@@ -287,4 +287,22 @@ else:
     should_call(players,futuro,pot,price)
 
     
+turn = []
+
+turn.append(str(input('enter card: '))) 
+flop.append(turn[0]) 
+
+combiturn = evalua(flop,combi)
+actual = (df.loc[df['valor'] >= combiturn[0], ['valor']].index[0]/2598960)*100
+futuro = (df.loc[df['valor'] >= combiturn[0], ['valor']].index[0]/2598960)*100
+print('tengo ahora un valor de %s y la media futura es %s' % (actual,futuro))
+
+players = float(input('enter number of players: ')) 
+pot = float(input('enter pot value: ')) 
+price = float(input('enter value of your bet: ')) 
+if  actual > futuro:
+    should_call(players,actual,pot,price)
+else: 
+    should_call(players,futuro,pot,price)
+
     
