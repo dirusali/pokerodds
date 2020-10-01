@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import itertools
 
 def build_deck():
     numbers=list(range(2,15))
