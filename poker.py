@@ -9,10 +9,6 @@ import numpy as np
 from itertools import permutations
 from numpy import vectorize
 import random
-import logging
-numba_logger = logging.getLogger('numba')
-numba_logger.setLevel(logging.WARNING)
-
 
 numbers=list(range(2,15))
 palos=['C','P','T','R']
@@ -22,17 +18,7 @@ for i in numbers:
         c = p+str(i)
         baraja.append(c)
 
-escalerareal = ['C14','C13','C12','C11','C10']
-escaleracolor = ['P10','P9','P8','P7','P6']
-poker = ['T9','C9','T9','R9','C4']
-full = ['P4','P4','P4','C12','R12']
-color = ['C11','C8','C4','C6','C14']
-escalera=['C10','P9','T8','R7','R6']
-trio = ['T6','R6','T6','R4','C2']
-doblepareja = ['C14','R4','P4','P11','T11']
-pareja = ['H11', 'H11', 'C2', 'D4', 'H3']
-pareja2 = ['H10', 'H10', 'C9', 'D8', 'H7']
-cartalta = ['H14','C13','R10','T4','D5']
+
 
 def check_poker(hand,letras,numeros,rnum,rletras):
     for i in numeros:
