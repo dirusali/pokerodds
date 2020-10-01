@@ -83,65 +83,66 @@ def score_hand(hand):
         if numbers ==[14,13,12,11,10]:
             handtype = 'royal_flush'
             score = 135
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+          # print('this hand is a %s:, with score: %s' % (handtype,score))  I comment the prints so the script runs faster 
         elif dif == 4 and max(rnum) == 1:
             handtype = 'straight_flush'
             score = 120 + max(numbers)
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+            hand2 = ['H7', 'H7', 'H7', 'H7', 'H7']
+          # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         elif 4 in rnum:
             handtype == 'four of a kind'
             score = check_four_of_a_kind(hand,letters,numbers,rnum,rlet)
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+          # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         elif sorted(rnum) == [2,2,3,3,3]:
             handtype == 'full house'
             score = check_full_house(hand,letters,numbers,rnum,rlet)
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+          # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         elif 3 in rnum:
             handtype = 'three of a kind'
             score = check_three_of_a_kind(hand,letters,numbers,rnum,rlet)
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+          # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         elif rnum.count(2) == 4:
             handtype = 'two pair'
             score = check_two_pair(hand,letters,numbers,rnum,rlet)
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+          # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         elif rnum.count(2) == 2:
             handtype = 'pair'
             score = check_pair(hand,letters,numbers,rnum,rlet)
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+          # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         else:
             handtype = 'flush'
             score = 75 + max(numbers)/100
-            print('this hand is a %s:, with score: %s' % (handtype,score)) 
+          # print('this hand is a %s:, with score: %s' % (handtype,score)) 
     elif 4 in rnum:
         handtype = 'four of a kind'
         score = check_four_of_a_kind(hand,letters,numbers,rnum,rlet)
-        print('this hand is a %s:, with score: %s' % (handtype,score)) 
+      # print('this hand is a %s:, with score: %s' % (handtype,score)) 
     elif sorted(rnum) == [2,2,3,3,3]:
        handtype = 'full house'
        score = check_full_house(hand,letters,numbers,rnum,rlet)
-       print('this hand is a %s:, with score: %s' % (handtype,score)) 
+     # print('this hand is a %s:, with score: %s' % (handtype,score)) 
     elif 3 in rnum:
         handtype = 'three of a kind' 
         score = check_three_of_a_kind(hand,letters,numbers,rnum,rlet)
-        print('this hand is a %s:, with score: %s' % (handtype,score)) 
+      # print('this hand is a %s:, with score: %s' % (handtype,score)) 
     elif rnum.count(2) == 4:
         handtype = 'two pair'
         score = check_two_pair(hand,letters,numbers,rnum,rlet)
-        print('this hand is a %s:, with score: %s' % (handtype,score)) 
+      # print('this hand is a %s:, with score: %s' % (handtype,score)) 
     elif rnum.count(2) == 2:
         handtype = 'pair'
         score = check_pair(hand,letters,numbers,rnum,rlet)
-        print('this hand is a %s:, with score: %s' % (handtype,score)) 
+      # print('this hand is a %s:, with score: %s' % (handtype,score)) 
     elif dif == 4:
         handtype = 'straight'
         score = 65 + max(numbers)
-        print('this hand is a %s:, with score: %s' % (handtype,score)) 
+      # print('this hand is a %s:, with score: %s' % (handtype,score)) 
 
     else:
         handtype= 'high card'
         n = sorted(numbers,reverse=True)
         score = n[0] + n[1]/100 + n[2]/1000 + n[3]/10000 + n[4]/100000
-        print('this hand is a %s:, with score: %s' % (handtype,score)) 
+      # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         
     return score
     
@@ -163,4 +164,4 @@ y = [i.get("value","") for i in hand_values] #making a list of values
 data = {'hands':x, 'value':y} # making a dictionary of hands and values
 df = pd.DataFrame(data) # making a pandas dataframe with hands and values
 
-df
+
