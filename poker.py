@@ -12,6 +12,28 @@ from itertools import permutations
 from numpy import vectorize
 import random
 
+from scores import combinations, combi, score_hand, hand_values, df
+
+from functools import lru_cache as cache
+import pandas as pd
+from IPython import get_ipython;   
+import itertools
+from statistics import mean
+from numba import jit, vectorize
+import timeit
+import numpy as np
+from itertools import permutations
+from numpy import vectorize
+import random
+
+@jit(nopython=True)
+def common(a,b):
+    common=[]
+    l1 = [i for i in a]
+    l2 = [i for i in b]
+    common = len([i for i in l1 if i in l2])
+    return common
+
 @jit(nopython=True)
 def numba_4():
     results = []
@@ -47,12 +69,12 @@ def opti_4():
 def expected_value(hand,combi):
     if len(hand) == 5:
         maxi = score_hand(hand)
-        mean= mean(opti_3() + opti_4())
-    elif len(mano) == 6:
-        maxi = max([score_hand(i) for i in combinations(mano,5)])
-        media = mean(opti_4())
-    elif len(mano) == 7:
-        maxi = max([score_hand(i) for i in combinations(mano,5)])
+        mean= np.mean(opti_3() + opti_4())
+    elif len(hand) == 6:
+        maxi = max([score_hand(i) for i in combinations(hand,5)])
+        mean = np.mean(opti_4())
+    elif len(hand) == 7:
+        maxi = max([score_hand(i) for i in combinations(hand,5)])
         mean= maxi    
     values = [maxi,mean]
     return values
@@ -66,3 +88,51 @@ def should_call(players,percentile,pot,price):
         print('You should bet as long as it is less than %s $' % ev)
     print('The expected value betting %s is %s $' % (price,ev-price))
     return pwin*100
+
+flop = []
+
+for i in range(0,5):
+    flop.append(str(input('enter card: ')))
+c4 = combinations(flop,4)
+c3 = combinations(flop,3)
+flopscore = expected_value(flop,combi)
+current = df.loc[df['value'] >= flopscore[0]].index[0]/2598960*100
+future  = df.loc[df['value'] >= flopscore[1]].index[1]/2598960*100
+print('My current value is  %s and the average expected value is %s' % (current,future))
+players = float(input('enter number of players: '))
+pot = float(input('enter pot value: '))
+price = float(input('enter value of your bet: '))
+if current > future:
+    should_call(players,current,pot,price)
+else:
+    should_call(players,future,pot,price)
+    
+
+turn = []
+
+turn.append(str(input('enter card: '))) 
+flop.append(turn[0]) 
+c4 = np.array([sorted(i) for i in combinations(flop,4)])
+combiturn = expected_value(flop,combi)
+current = df.loc[df['value'] >= combiturn[0]].index[0]/2598960*100
+future  = df.loc[df['value'] >= combiturn[1]].index[0]/2598960*100
+print('My current value is %s and the average future value is %s' % (current,future))
+
+players = float(input('enter number of players: ')) 
+pot = float(input('enter pot value: ')) 
+price = float(input('enter value of your bet: ')) 
+if  current > future:
+    should_call(players,current,pot,price)
+else: 
+    should_call(players,future,pot,price)
+    
+river = []
+river.append(str(input('enter card: ')))
+flop.append(river[0])
+combiriver = expected_value(flop,combi)
+current = df.loc[df['value'] >= combiriver[0]].index[0]/2598960*100
+print('My final value is %s' % current)
+players = float(input('enter number of players: '))
+pot = float(input('enter pot value: '))
+price = float(input('enter value of your bet: '))
+should_call(players,current, pot,price)
