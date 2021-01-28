@@ -157,12 +157,13 @@ def blind():
 def should_call(players,percentile,pot,price):
     pwin = (percentile/100)**players
     ev = pwin*pot
-    if ev <= 0:
-        print('no apostar')
-    if ev > 0:
-        print('Merece la pena apostar siempre que cueste menos de %s euros' % ev)
-    print('el valor esperado apostando %s es %s ' % (price,ev-price))
+    if ev - price <= 0:
+        print('you should fold')
+    if ev - price > 0:
+        print('You should bet')
+    print('The expected value betting %s is %s $' % (price,ev-price))
     return pwin*100
+
 
 def flop():
     flop = []
