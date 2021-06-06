@@ -122,6 +122,9 @@ def score_hand(hand):
        handtype = 'full house'
        score = check_full_house(hand,letters,numbers,rnum,rlet)
      # print('this hand is a %s:, with score: %s' % (handtype,score)) 
+    elif sorted(numbers) == [2, 3, 4, 5, 14]:
+        handtype = 'straight'
+        return 60
     elif 3 in rnum:
         handtype = 'three of a kind' 
         score = check_three_of_a_kind(hand,letters,numbers,rnum,rlet)
@@ -136,7 +139,7 @@ def score_hand(hand):
       # print('this hand is a %s:, with score: %s' % (handtype,score)) 
     elif dif == 4:
         handtype = 'straight'
-        score = 65 + max(numbers)
+        score = 55 + max(numbers)
       # print('this hand is a %s:, with score: %s' % (handtype,score)) 
 
     else:
@@ -146,8 +149,6 @@ def score_hand(hand):
       # print('this hand is a %s:, with score: %s' % (handtype,score)) 
         
     return score
-    
-
 
 
 def handvalues(combinations):
@@ -164,5 +165,3 @@ y = [i.get("value","") for i in hand_values] #making a list of values
 
 data = {'hands':x, 'value':y} # making a dictionary of hands and values
 df = pd.DataFrame(data) # making a pandas dataframe with hands and values
-
-
