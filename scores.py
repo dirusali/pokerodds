@@ -43,8 +43,7 @@ def check_three_of_a_kind(hand,letters,numbers,rnum,rlet):
             three = i
         else: 
             cards.append(i)
-    score = 45 + three + max(cards) + min(cards)/1000
-    return score
+    return 45 + three + (max(cards) + min(cards)) / 1000
 
 def check_two_pair(hand,letters,numbers,rnum,rlet):
     pairs = []
